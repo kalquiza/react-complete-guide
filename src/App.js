@@ -1,44 +1,39 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
-class App extends Component {
-  state = {
+const app = props => {
+  const [personsState, setPersonsState] = useState({
     persons: [
       { name: '???', age: 0 },
-      { name:'???', age: 1000}
+      { name: '???', age: 1000 }
     ],
+  });
+
+  const [otherState, setOtherState] = useState({
     otherState: 'some other value'
-  }
+  })
 
-  switchNameHandler = () => {
-    // console.log('Was clicked!');
-    
-    // Do not mutate state directly
-    // this.state.persons[0].name = 'deosn't work';
+  console.log(personsState, otherState);
 
-    this.setState( {
+  const switchNameHandler = () => {
+    setPersonsState({
       persons: [
         { name: 'Kris', age: 0 },
-        { name:'Nina', age: 1000}
+        { name: 'Nina', age: 1000 }
       ]
-    } )
+    })
   }
 
-  render() {
-    return (
-      <div className="App">
-        <h1>Hello, this is a new React app!</h1>
-        <p>This is really working!</p>
-        <button onClick={this.switchNameHandler}>Reveal Names</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}>Hobbies: Unknown</Person>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>Hobbies: Sleeping </Person>
-      </div>
-    );
-
-    // JSX is syntactic sugar that will compile into vanilla JavaScript
-    // return React.createElement('div', null, React.createElement('h1', {className: 'App'},'Hello, this is a new React app!'))
-  }
+  return (
+    <div className="App">
+      <h1>Hello, this is a new React app!</h1>
+      <p>This is really working!</p>
+      <button onClick={switchNameHandler}>Reveal Names</button>
+      <Person name={personsState.persons[0].name} age={personsState.persons[0].age}>Hobbies: Unknown</Person>
+      <Person name={personsState.persons[1].name} age={personsState.persons[1].age}>Hobbies: Sleeping </Person>
+    </div>
+  );
 }
 
-export default App;
+export default app;
