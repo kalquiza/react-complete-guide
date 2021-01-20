@@ -5,25 +5,11 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: '???', age: 0 },
-      { name: '???', age: 1000 }
+      { id: 'z57uhk', name: '???', age: 0 },
+      { id: 'jr5xkn', name: '???', age: 1000 }
     ],
     otherState: 'some other value',
     showPersons: false
-  }
-
-  switchNameHandler = (newName) => {
-    // console.log('Was clicked!');
-
-    // Do not mutate state directly
-    // this.state.persons[0].name = 'deosn't work';
-
-    this.setState({
-      persons: [
-        { name: newName, age: 0 },
-        { name: 'Nina', age: 1000 }
-      ]
-    })
   }
 
   nameChangedHandler = (event) => {
@@ -33,6 +19,15 @@ class App extends Component {
         { name: 'Nina', age: 1000 }
       ]
     })
+  }
+
+  deletePersonHandler = (personIndex) => {
+    // Update state immutably by copying the state
+    // use splice() or the spread operator with ES6
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons})
   }
 
   togglePersonsHandler = (event) => {
@@ -54,12 +49,14 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
+          {this.state.persons.map((person, index) => {
             return (
-              <Person>
+              <Person
+                click={() => this.deletePersonHandler(index)}
                 name={person.name}
                 age={person.age}
-              </Person>
+                key={person.id}
+              />
             )
           })}
           {/* <Person>
