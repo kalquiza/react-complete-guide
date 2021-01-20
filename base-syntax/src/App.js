@@ -8,7 +8,8 @@ class App extends Component {
       { name: '???', age: 0 },
       { name: '???', age: 1000 }
     ],
-    otherState: 'some other value'
+    otherState: 'some other value',
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -34,6 +35,11 @@ class App extends Component {
     })
   }
 
+  togglePersonsHandler = (event) => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -43,25 +49,35 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+            click={this.switchNameHandler.bind(this, 'Kristoff')}
+            changed={this.nameChangedHandler} >
+            Hobbies: Unknown</Person>
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, 'Kristoffer')} >
+            Hobbies: Sleeping </Person>
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Hello, this is a new React app!</h1>
         <p>This is really working!</p>
         <button 
-          onClick={() => this.switchNameHandler('Kris')}
-          style={style}> Reveal Names
+          onClick={this.togglePersonsHandler}
+          style={style}> Reveal persons
         </button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          click={this.switchNameHandler.bind(this, 'Kristoff')}
-          changed={this.nameChangedHandler} >
-          Hobbies: Unknown</Person>
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'Kristoffer')} >
-          Hobbies: Sleeping </Person>
+        {persons}
       </div>
     );
 
