@@ -6,7 +6,8 @@ class App extends Component {
   state = {
     persons: [
       { id: 'z57uhk', name: '???', age: 0 },
-      { id: 'jr5xkn', name: '???', age: 1000 }
+      { id: 'jr5xkn', name: '???', age: 1000 },
+      { id: 'd94mds', name: '???', age: 10000 }
     ],
     otherState: 'some other value',
     showPersons: false
@@ -46,7 +47,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -69,6 +71,7 @@ class App extends Component {
               />
             )
           })}
+
           {/* <Person>
             name={this.state.persons[0].name}
             age={this.state.persons[0].age}
@@ -82,12 +85,23 @@ class App extends Component {
             Hobbies: Sleeping </Person> */}
         </div>
       );
+
+      style.backgroundColor = 'red';
+    }
+
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red'); // classes = ['red']
+    }
+
+    if (this.state.persons.length <= 1) {
+      classes.push('bold'); // classes = ['red' 'bold']
     }
 
     return (
       <div className="App">
         <h1>Hello, this is a new React app!</h1>
-        <p>This is really working!</p>
+        <p className={classes.join(' ')}>This is really working!</p>
         <button 
           onClick={this.togglePersonsHandler}
           style={style}> Reveal persons
