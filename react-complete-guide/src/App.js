@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -108,15 +108,17 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <h1>Hello, this is a new React app!</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
-        <button 
-          onClick={this.togglePersonsHandler}
-          style={style}> Reveal persons
-        </button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hello, this is a new React app!</h1>
+          <p className={classes.join(' ')}>This is really working!</p>
+          <button 
+            onClick={this.togglePersonsHandler}
+            style={style}> Reveal persons
+          </button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
 
     // JSX is syntactic sugar that will compile into vanilla JavaScript
