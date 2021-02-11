@@ -17,8 +17,8 @@ class OrderSummary extends Component {
             </li>
         })
 
-        return (
-            <Aux>
+    return (
+        <Aux>
             <h3>Your Order</h3>
             <p>A tasty burger with the following ingredients:</p>
             <ul>
