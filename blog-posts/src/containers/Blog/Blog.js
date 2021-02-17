@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
 import './Blog.css';
-import Posts from '../Posts/Posts'
+import Posts from '../Posts/Posts';
+import NewPost from '../NewPost/NewPost';
 
 class Blog extends Component {
     render () {
@@ -15,7 +17,11 @@ class Blog extends Component {
                         </ul>
                     </nav>
                 </header>
-                <Posts />
+                <Route path="/" render={() => <h1 style={{textAlign: "center"}}>The Blog Blog</h1>}/>
+                <Route path="/" exact  render={() => <h2 style={{textAlign: "center"}}>Home</h2>}/>
+                <Route path="/" exact component={Posts} />
+                <Route path="/new-post" render={() => <h2 style={{textAlign: "center"}}>New Post</h2>}/>
+                <Route path="/new-post" component={NewPost}/>
             </div>
         );
     }
