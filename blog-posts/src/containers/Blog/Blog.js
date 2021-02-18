@@ -5,6 +5,10 @@ import './Blog.css';
 import Posts from '../Posts/Posts';
 import NewPost from '../NewPost/NewPost';
 class Blog extends Component {
+    state = {
+        auth: true
+    }
+
     render () {
         return (
             <div className="Blog">
@@ -30,7 +34,7 @@ class Blog extends Component {
                 <Route path="/" exact  render={() => <h2 style={{textAlign: "center"}}>Home</h2>}/>
                 <Route path="/new-post" render={() => <h2 style={{textAlign: "center"}}>New Post</h2>}/> */}
                 <Switch>
-                    <Route path="/new-post" component={NewPost}/>
+                    {this.state.auth ? <Route path="/new-post" component={NewPost} /> : null}
                     <Route path="/posts" component={Posts} />
                     <Redirect from="/" to="/posts" />
                     {/* <Route path="/" component={Posts} /> */}
