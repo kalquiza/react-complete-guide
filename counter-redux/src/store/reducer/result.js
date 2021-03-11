@@ -7,6 +7,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.STORE_RESULT:
+            // const updatedResponse = action.result * 2;
             return {
                 ...state,
                 results: state.results.concat({
