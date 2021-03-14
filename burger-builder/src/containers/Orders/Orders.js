@@ -18,8 +18,9 @@ class Orders extends Component {
     }
 
     render() {
-        let orders = this.props.error ? <p>Orders couldn't be loaded :(</p> : <Spinner />
-        if (!this.props.loading) {
+        let orders = <p>Orders couldn't be loaded :(</p>;
+        if (this.props.loading) orders = <Spinner />;
+        if (!this.props.loading && !this.props.error) {
             orders = (
                 <div>
                     {this.props.orders.map(order => (

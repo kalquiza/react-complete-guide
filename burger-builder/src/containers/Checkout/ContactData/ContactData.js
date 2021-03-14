@@ -181,6 +181,10 @@ class ContactData extends Component {
             form = <Spinner />
         }
 
+        if (this.props.error) {
+            form = <p>There was an error processing your order :(</p>
+        }
+
         return (
             <div className={classes.ContactData}>
                 <h4>Enter your contact data</h4>
@@ -194,7 +198,8 @@ const mapStateToProps = state => {
     return {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
-        loading: state.order.loading
+        loading: state.order.loading,
+        error: state.order.error
     }
 }
 
