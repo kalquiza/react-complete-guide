@@ -3,7 +3,7 @@ import axios from '../../../axios-orders';
 import { connect } from 'react-redux';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions/index';
-import { updateObject } from '../../../shared/utility';
+import { updateObject, checkValidity } from '../../../shared/utility';
 
 import classes from './ContactData.module.css';
 import Button from '../../../components/UI/Button/Button';
@@ -139,7 +139,7 @@ class ContactData extends Component {
 
         const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
             value: event.target.value,
-            valid: this.checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validation),
+            valid: checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validation),
             touched: true
         });
         const updatedOrderForm = updateObject(this.state.orderForm, {
